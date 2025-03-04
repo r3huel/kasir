@@ -77,7 +77,6 @@ char *generate_ID() {
 }
 
 //fungsi untuk cetak struk
-//fungsi untuk cetak struk
 void cetak_struk(int total_harga, int total_diskon, int total_bayar, int bayar, int kembalian) {
     FILE *file;
     char *id = generate_ID();
@@ -90,7 +89,6 @@ void cetak_struk(int total_harga, int total_diskon, int total_bayar, int bayar, 
     fprintf(file,"                   Jl. HOS Cokroaminoto No 84 Denpasar                   \n");
     fprintf(file,"                                  Bali                                   \n");
     fprintf(file,"                             Telp: 0816285791                            \n");
-    fprintf(file,"ID Struk: %s\n", id);
     fprintf(file,"=========================================================================\n");
     fprintf(file,"| %-18s | %-11s | %-11s | %-11s |\n", "Nama Barang", "Harga", "Total Harga", "Diskon");
     for(int i=0; i<last_index; i++) {
@@ -101,12 +99,15 @@ void cetak_struk(int total_harga, int total_diskon, int total_bayar, int bayar, 
     fprintf(file,"Total Harga : %d\n", total_harga);
     fprintf(file,"Total Diskon : %d\n", total_diskon);
     fprintf(file,"Tagihan : %d\n", total_bayar);
+    fprintf(file,"=========================================================================\n");
     fprintf(file,"Pembayaran : %d\n", bayar);
+    fprintf(file,"=========================================================================\n");
     fprintf(file,"Kembalian : %d\n", kembalian);
     fprintf(file,"=========================================================================\n");
 
     char *time_now = get_time_now();
     fprintf(file,"Waktu: %s", time_now);
+    fprintf(file,"ID Struk: %s\n", id);
     fclose(file);
 
     printf("Struk anda telah dicetak pada file %s\n", filename);
@@ -142,7 +143,11 @@ int main(){
                 printf("\n| %-3s | %-15s | %-15s | %-15s | %-15s | %-15s |\n", "No.", "Jumlah", "Nama Barang", "Harga", "Total", "Diskon");
                 for(int i=0; i<last_index-1; i++) {
                     for(int j=0; j<last_index-i-1; j++) {
-                        if(jumlah[sorted_index[j]] < jumlah[sorted_index[j+1]]){
+                        int total_j = jumlah[sorted_index[j]] * harga_barang[sorted_index[j]];
+                        int total_jp1 = jumlah[sorted_index[j+1]] * harga_barang[sorted_index[j+1]];
+
+                        if(total_j < total_jp1) {
+                            // Tukar posisi indeks
                             int temp = sorted_index[j];
                             sorted_index[j] = sorted_index[j+1];
                             sorted_index[j+1] = temp;
