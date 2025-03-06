@@ -3,7 +3,6 @@
 #include <string.h>  // Untuk manipulasi string seperti strcpy, strcmp, dll.
 #include <time.h>    // Untuk mengelola waktu dan tanggal seperti time(), localtime(), asctime().
 
-
 //deklarasi variabel global
 int pilihan1, pilihan2 = 0;                                                                 //simpen input pilihan user
 char barang[5][20] = {"Buku Tulis", "Pensil", "Penghapus", "Penggaris", "Bujur Sangkar"};   //array string barang yg dijual
@@ -24,26 +23,24 @@ void cetak_garis(int length) {
     }
 }
 
-//fungsi untuk cetak pilihan
+//fungsi cetak pilihan
 void cetak_pilihan() {
-    cetak_garis(14);
-    printf("TOKO SKENSA");
-    cetak_garis(14);
-    printf("\n\n");
+    cetak_garis(39);
+    printf("\n|            TOKO SKENSA              |\n");
 
     cetak_garis(39);
-    printf("\n| %-3s | %-15s | %-11s |\n", "No.", "Nama Barang", "Harga");
+    printf("\n| %-3s | %-15s | %-11s |\n", "no.", "nama barang", "harga");
     cetak_garis(39);
     printf("\n");
 
-    for(int i=0; i<5; i++){
-        printf("| %-3d | %-15s | Rp%-8d |\n", i+1, barang[i], harga[i]);
+    for(int i=0; i<5; i++) {
+        printf("| %-3d | %-15s | %11d |\n", i+1, barang[i], harga[i]);
     }
 
     cetak_garis(39);
-    printf("\n99. Struk Pembayaran\n");
-    printf("55. Reset\n");
-    printf("00. Keluar\n");
+    printf("\n|99 bayar dan cetak struk             |\n");
+    printf("|55 reset keranjang                   |\n");
+    printf("|00 keluar                            |\n");
     cetak_garis(39);
     printf("\n");
 }
@@ -117,7 +114,6 @@ void cetak_struk(int total_harga, int total_diskon, int total_bayar, int bayar, 
     sprintf(command, "notepad %s", filename);
     system(command);
 }
-
 
 int main(){
 
